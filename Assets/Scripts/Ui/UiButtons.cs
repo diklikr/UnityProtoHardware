@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UiButtons : MonoBehaviour
 {
+    [SerializeField]
+    private CanvasGroup _pauseCanvas;
+
+    LoadGame loadGame;
     public void StartButoon()
     {
-        SceneManager.LoadScene(1);
+       loadGame.StartScreen();
     }
 
     public void ExitButton()
@@ -17,7 +20,15 @@ public class UiButtons : MonoBehaviour
 
     public void RestartButton()
     {
-        SceneManager.LoadScene(0);
+       loadGame.GameScreen();
     }
+
+    public void Unpause()
+    {
+        _pauseCanvas.alpha = 0;
+        _pauseCanvas.interactable = false;
+        _pauseCanvas.blocksRaycasts = false;
+    }
+
 }
 
