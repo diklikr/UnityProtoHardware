@@ -7,6 +7,8 @@ public class Clock : MonoBehaviour
 {
     float time = 60.0f;
     int minutes = 5;
+    float timeSub = 15.0f;
+    bool pressedButton = true;
     public TextMeshPro secs;
     public TextMeshPro mins;
     LoadGame loadGame;
@@ -20,9 +22,21 @@ public class Clock : MonoBehaviour
         Death();
     }
 
-    public void ClockButton()
+    public void ClockButton(bool pressed)
     {
-
+        pressedButton = pressed;
+        if(time == 40.0f)
+        {
+            pressedButton = false;
+        }
+        if (time == 20.0f)
+        {
+            if (pressedButton == false)
+            {
+                time -= timeSub;
+               pressedButton = true;
+            }
+        }
     }
 
     void TimeMins()
