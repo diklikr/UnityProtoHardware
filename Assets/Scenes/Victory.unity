@@ -122,6 +122,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &153380144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153380146}
+  - component: {fileID: 153380145}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &153380145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153380144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bfc1fa6853cb654fa70cd781b11936f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &153380146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153380144}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 255.73595, y: 128.32994, z: 191.62558}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &629373373
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c197643f0149dcf44a389261c0d24b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseCanvas: {fileID: 0}
 --- !u!1 &2015657066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1143,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2065151498}
         m_TargetAssemblyTypeName: UiButtons, Assembly-CSharp
-        m_MethodName: RestartButton
+        m_MethodName: StartButoon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1158,6 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c197643f0149dcf44a389261c0d24b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseCanvas: {fileID: 0}
 --- !u!1 &2088023187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,3 +1306,4 @@ SceneRoots:
   - {fileID: 2088023189}
   - {fileID: 1210458395}
   - {fileID: 1273319410}
+  - {fileID: 153380146}

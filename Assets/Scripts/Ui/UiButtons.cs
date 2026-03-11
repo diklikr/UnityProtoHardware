@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class UiButtons : MonoBehaviour
 {
-    [SerializeField]
-    private CanvasGroup _pauseCanvas;
+    //[SerializeField]
+    //private CanvasGroup _pauseCanvas;
 
     LoadGame loadGame;
-    public void StartButoon()
+    public void StartButton()
     {
        loadGame.StartScreen();
     }
@@ -23,12 +23,12 @@ public class UiButtons : MonoBehaviour
        loadGame.GameScreen();
     }
 
-    public void Unpause()
-    {
-        _pauseCanvas.alpha = 0;
-        _pauseCanvas.interactable = false;
-        _pauseCanvas.blocksRaycasts = false;
-    }
+    //public void Unpause()
+    //{
+    //    _pauseCanvas.alpha = 0;
+    //    _pauseCanvas.interactable = false;
+    //    _pauseCanvas.blocksRaycasts = false;
+    //}
 
 }
 
