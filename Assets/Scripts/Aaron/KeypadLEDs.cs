@@ -1,25 +1,22 @@
 using UnityEngine;
-using TMPro; // Librería base que contiene TMP_Text, TextMeshPro y TextMeshProUGUI
-using System.Collections.Generic;
+using TMPro;
 
 public class KeypadLEDs : MonoBehaviour
 {
     public SerialManager gestorSerial;
 
     [Header("Textos de Pistas (Acepta Canvas UGUI y Textos 3D)")]
-    [Tooltip("Orden físico: Azul, Blanco, Amarillo, Verde, Rojo")]
-    // Al usar TMP_Text, Unity acepta ambos tipos de componentes en el mismo arreglo
     public TMP_Text[] textosPistasColores = new TMP_Text[5];
 
     [Header("UI del Keypad")]
     public TextMeshProUGUI displayInput;
-    public GameObject panelKeypad;
+    public CanvasGroup grupoCanvasKeypad; // Reemplaza al GameObject
 
     private string solucionCorrecta = "";
 
     void Start()
     {
-        panelKeypad.SetActive(false);
+        CerrarKeypad(); // Se oculta al iniciar
         GenerarPuzzleNuevo();
     }
 
@@ -31,7 +28,6 @@ public class KeypadLEDs : MonoBehaviour
             int num = Random.Range(0, 10);
             solucionCorrecta += num.ToString();
 
-            // Verificamos que no esté vacío antes de asignarle el número
             if (textosPistasColores[i] != null)
             {
                 textosPistasColores[i].text = num.ToString();
@@ -51,12 +47,34 @@ public class KeypadLEDs : MonoBehaviour
         if (displayInput.text == solucionCorrecta)
         {
             gestorSerial.EnviarComandoArduino("LED_WIN");
-            panelKeypad.SetActive(false); // Cierra el keypad al ganar
+            CerrarKeypad(); // Se oculta cuando ganan
         }
         else
         {
             gestorSerial.EnviarComandoArduino("LED_FAIL");
-            Borrar(); // Borra el input para volver a intentar
+            Borrar();
+        }
+    }
+
+    // --- MÉTODOS PÚBLICOS PARA MOSTRAR/OCULTAR EL CANVAS GROUP ---
+
+    public void AbrirKeypad()
+    {
+        if (grupoCanvasKeypad != null)
+        {
+            grupoCanvasKeypad.alpha = 1f;
+            grupoCanvasKeypad.interactable = true;
+            grupoCanvasKeypad.blocksRaycasts = true;
+        }
+    }
+
+    public void CerrarKeypad()
+    {
+        if (grupoCanvasKeypad != null)
+        {
+            grupoCanvasKeypad.alpha = 0f;
+            grupoCanvasKeypad.interactable = false;
+            grupoCanvasKeypad.blocksRaycasts = false;
         }
     }
 }
