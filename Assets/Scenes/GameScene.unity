@@ -21728,6 +21728,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c5df0b918c5fb6346b864efdc25dfc89, type: 3}
       insertIndex: -1
       addedObject: {fileID: 609105159}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c5df0b918c5fb6346b864efdc25dfc89, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 609105162}
   m_SourcePrefab: {fileID: 100100000, guid: c5df0b918c5fb6346b864efdc25dfc89, type: 3}
 --- !u!1 &609105156 stripped
 GameObject:
@@ -21762,7 +21765,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609105156}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98e9d3bd7166d5347a03edf3578aebab, type: 3}
   m_Name: 
@@ -21782,7 +21785,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -21806,6 +21809,20 @@ MonoBehaviour:
   clickableLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &609105162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609105156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f1feec0065e2846ad2bc9579cdfc25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 609105159}
+  animator: {fileID: 609105157}
 --- !u!1 &609361989
 GameObject:
   m_ObjectHideFlags: 0

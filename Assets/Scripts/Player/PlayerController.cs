@@ -26,11 +26,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // La máquina de estados controla la lógica
-        stateMachine.CurrentState.LogicUpdate();
+        // Esto es vital: le dice al estado actual que ejecute su lógica
         stateMachine.CurrentState.HandleInput();
+        stateMachine.CurrentState.LogicUpdate();
 
-        // La animación sigue dependiendo de la velocidad
-        animator.SetFloat("Speed", agent.velocity.magnitude, 0.1f, Time.deltaTime);
+        // El Animator se queda aquí porque es global
+        float speed = agent.velocity.magnitude;
+        animator.SetFloat("Speed", speed, 0.1f, Time.deltaTime);
     }
 }
