@@ -1,59 +1,69 @@
 using Cinemachine;
+using System.Collections;
 using UnityEngine;
 
 public class CamaraSwitch : MonoBehaviour
 {
+    [Header("Configuración de Cámaras")]
     public CinemachineVirtualCamera[] cameras;
-    private int currentCameraIndex = 0;
+
+    [SerializeField] private int currentCameraIndex = 0;
 
     void Start()
     {
-        // Set initial priorities
-        ActivateCamera(0);
+        // Inicializamos: todas a 0 excepto la primera
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            cameras[i].Priority = (i == currentCameraIndex) ? 10 : 0;
+        }
     }
 
     void Update()
     {
-        // Switch cameras with number keys 1-7
-        if (Input.GetKeyDown(KeyCode.Alpha1)) ActivateCamera(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) ActivateCamera(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) ActivateCamera(2);
-        if (Input.GetKeyDown(KeyCode.Alpha4)) ActivateCamera(3);
-        if (Input.GetKeyDown(KeyCode.Alpha5)) ActivateCamera(4);
-        if (Input.GetKeyDown(KeyCode.Alpha6)) ActivateCamera(5);
-        if (Input.GetKeyDown(KeyCode.Alpha7)) ActivateCamera(6);
+        // 1. Detección genérica de números (Alpha1 al Alpha9)
+        for (int i = 0; i < cameras.Length && i < 9; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                ActivateCamera(i);
+            }
+        }
 
-        // Or cycle through with arrow keys
+        // 2. Ciclo con flechas
         if (Input.GetKeyDown(KeyCode.RightArrow)) SwitchToNextCamera();
         if (Input.GetKeyDown(KeyCode.LeftArrow)) SwitchToPreviousCamera();
     }
 
     public void ActivateCamera(int index)
     {
-        // Deactivate all cameras
-        for (int i = 0; i < cameras.Length; i++)
-        {
-            cameras[i].Priority = 0;
-        }
+        // Validación de rango
+        if (index < 0 || index >= cameras.Length || index == currentCameraIndex) return;
 
-        // Activate the selected camera
-        if (index >= 0 && index < cameras.Length)
-        {
-            cameras[index].Priority = 10;
-            currentCameraIndex = index;
-        }
+        // APAGAMOS la actual, ENCENDEMOS la nueva (Solo 2 operaciones en vez de un bucle for)
+        cameras[currentCameraIndex].Priority = 0;
+        cameras[index].Priority = 10;
+
+        currentCameraIndex = index;
+        StartCoroutine(SlowMotionEffect());
+        GetComponent<AudioSource>().Play(); // Reproducir sonido de cambio de cámara
     }
 
     public void SwitchToNextCamera()
     {
-        currentCameraIndex = (currentCameraIndex + 1) % cameras.Length;
-        ActivateCamera(currentCameraIndex);
+        int next = (currentCameraIndex + 1) % cameras.Length;
+        ActivateCamera(next);
     }
 
     public void SwitchToPreviousCamera()
     {
-        currentCameraIndex--;
-        if (currentCameraIndex < 0) currentCameraIndex = cameras.Length - 1;
-        ActivateCamera(currentCameraIndex);
+        int prev = (currentCameraIndex - 1 + cameras.Length) % cameras.Length;
+        ActivateCamera(prev);
+    }
+
+    IEnumerator SlowMotionEffect()
+    {
+        Time.timeScale = 0.4f; // 40% de la velocidad normal
+        yield return new WaitForSecondsRealtime(0.2f); // Espera tiempo real (no afectado por la escala)
+        Time.timeScale = 1f; // Vuelve a la normalidad
     }
 }
