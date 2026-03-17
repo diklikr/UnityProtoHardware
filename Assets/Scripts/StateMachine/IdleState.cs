@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems; // Librería necesaria para detectar la UI
+
 public class IdleState : State
 {
     public IdleState(PlayerController player, StateMachine stateMachine) : base(player, stateMachine) { }
@@ -14,6 +16,12 @@ public class IdleState : State
 
     public override void HandleInput()
     {
+        // --- ESCUDO ANTI-UI ---
+        //if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    return; // Si el mouse está sobre la interfaz, cancelamos el clic
+        //}
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

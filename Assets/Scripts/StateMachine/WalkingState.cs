@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems; // Librería necesaria
 
 public class WalkingState : State
 {
@@ -6,15 +7,19 @@ public class WalkingState : State
 
     public override void Enter()
     {
-        // Aquí podrías disparar un trigger de animación si fuera necesario
         Debug.Log("Entrando al estado: WALKING");
-
         player.animator.SetTrigger("StartWalking");
     }
 
     public override void HandleInput()
     {
-        // Permitimos que el jugador cambie de destino mientras camina (clic de nuevo)
+        // --- ESCUDO ANTI-UI ---
+        //if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    return; // Si tocamos un botón, evitamos recalcular la ruta
+        //}
+
+        // Permitimos que el jugador cambie de destino mientras camina
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -27,8 +32,6 @@ public class WalkingState : State
 
     public override void LogicUpdate()
     {
-        // Si el agente se detiene o llega a su destino, volvemos a Idle
-        // Usamos pathPending para asegurarnos de que el NavMesh ya calculó la ruta
         if (!player.agent.pathPending && player.agent.remainingDistance <= player.agent.stoppingDistance)
         {
             if (!player.agent.hasPath || player.agent.velocity.sqrMagnitude == 0f)
