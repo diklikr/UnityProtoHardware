@@ -29,11 +29,33 @@ public class PistaDinamica : MonoBehaviour
             string clave = SerialManager.claveSwitches;
             if (clave.Length < 5) return;
 
-            // Actualizamos el texto
+            // Traducimos el 1 o 0 a un texto más inmersivo con colores de interfaz
+            string s1 = clave[0] == '1' ? "<color=#00FF00>ACTIVO</color>" : "<color=#FF0000>INACTIVO</color>";
+            string s2 = clave[1] == '1' ? "<color=#00FF00>ACTIVO</color>" : "<color=#FF0000>INACTIVO</color>";
+            string s3 = clave[2] == '1' ? "<color=#00FF00>ACTIVO</color>" : "<color=#FF0000>INACTIVO</color>";
+            string s4 = clave[3] == '1' ? "<color=#00FF00>ACTIVO</color>" : "<color=#FF0000>INACTIVO</color>";
+            string s5 = clave[4] == '1' ? "<color=#00FF00>ACTIVO</color>" : "<color=#FF0000>INACTIVO</color>";
+
+            // Actualizamos el texto dependiendo de qué parte de la pista sea
             if (esPistaA)
-                cuadroTexto.text = encabezado + "\nInterruptores 1,3,5 en: " + clave[0] + ", " + clave[2] + ", " + clave[4];
+            {
+                cuadroTexto.text = "<b>" + encabezado + "</b>\n\n" +
+                                   "Aviso al personal de mantenimiento. Las terminales impares han sido recalibradas tras el último incidente.\n" +
+                                   "Para evitar una sobrecarga en el núcleo, mantengan la consola en esta configuración:\n\n" +
+                                   "  • Bomba Principal (1): " + s1 + "\n" +
+                                   "  • Filtro de Aire (3): " + s3 + "\n" +
+                                   "  • Extractor (5): " + s5 + "\n\n" +
+                                   "Cualquier modificación sin autorización provocará el bloqueo de la zona.";
+            }
             else
-                cuadroTexto.text = encabezado + "\nRelés 2 y 4 en: " + clave[1] + ", " + clave[3];
+            {
+                cuadroTexto.text = "<b>" + encabezado + "</b>\n\n" +
+                                   "Directiva de emergencia. Las líneas pares sufrieron daños durante el apagón.\n" +
+                                   "Hasta que el jefe de mecánicos regrese, el soporte vital requiere estrictamente los siguientes parámetros:\n\n" +
+                                   "  • Refrigeración (2): " + s2 + "\n" +
+                                   "  • Purificador (4): " + s4 + "\n\n" +
+                                   "No intenten puentear los fusibles o el cuarto de máquinas entero estallará.";
+            }
 
             // Hacemos visible el CanvasGroup
             if (grupoCanvas != null)
