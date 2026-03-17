@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VictoryBox : MonoBehaviour
 {
     LoadGame loadGame;
 
+   
         void OnTriggerEnter(Collider other)
         {
         if(other.gameObject.tag == "Player")
         {
-            loadGame.Victory();
-            }
+            SceneManager.LoadScene(3);
+        }
     }
 }

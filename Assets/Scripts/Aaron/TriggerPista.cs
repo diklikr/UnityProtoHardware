@@ -16,6 +16,7 @@ public class TriggerPista : MonoBehaviour
             canvasPista.SetActive(true);
 
             pistaAudioOpen.Play();
+            Debug.Log("Player entered the trigger area. Canvas activated and audio played.");
         }
 
 
@@ -28,6 +29,7 @@ public class TriggerPista : MonoBehaviour
         {
             canvasPista.SetActive(false);
             pistaAudioClose.Play();
+            Debug.Log("Player exited the trigger area. Canvas deactivated and audio played.");
         }
 
     }
