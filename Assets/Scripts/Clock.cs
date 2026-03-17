@@ -6,7 +6,7 @@ using UnityEngine;
 public class Clock : MonoBehaviour
 {
     float time = 60.0f;
-    int minutes = 5;
+    int minutes = 4;
     float timeSub = 15.0f;
     bool pressedButton = true;
     public TextMeshPro secs;
